@@ -1,6 +1,6 @@
 #include <stdio.h>
-/*
- * main - print a line of words using puts function
+/**
+ * main -Print a line of words using puts function
  *
  * Return: 0
  */
