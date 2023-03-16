@@ -12,7 +12,7 @@ void *malloc_checked(unsigned int b)
 {
 	char *p;
 
-	p = malloc(b);
+	p = (char *)malloc(b * sizeof(char));
 
 	if (p == NULL)
 		exit(98);
