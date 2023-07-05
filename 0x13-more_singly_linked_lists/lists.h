@@ -3,6 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+/**
+ * struct listint_s - represents the singly linked list
+ * @n: represemts the integer
+ * @next: it points to the next node
+ */
 
 typedef struct listint_s
 {
