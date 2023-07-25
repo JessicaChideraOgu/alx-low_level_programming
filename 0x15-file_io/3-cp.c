@@ -46,7 +46,7 @@ void close_file(int fd)
 
 /**
  * main - it copies the contents of a file into another file.
- * @argc: The number of arguments supplied to the program.
+ * @argc: The number of arguments that will be supplied to the program.
  * @argv: the array of pointers to the arguments.
  *
  * Return: 0 on success.
@@ -58,8 +58,8 @@ void close_file(int fd)
  */
 int main(int argc, char *argv[])
 {
-	int top, bottom, b, d;
-	char *value;
+	int top, bottom, r, w;
+	char *buffer;
 
 	if (argc != 3)
 	{
@@ -67,35 +67,35 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 
-	value = create_buffer(argv[2]);
+	buffer = create_buffer(argv[2]);
 	top = open(argv[1], O_RDONLY);
-	b = read(top, value, 1024);
+	r = read(top, buffer, 1024);
 	bottom = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
-	if (top == -1 || b == -1)
+	if (top == -1 || r == -1)
 	{
 		dprintf(STDERR_FILENO,
 		"Error: Can't read from file %s\n", argv[1]);
-		free(value);
+		free(buffer);
 		exit(98);
 	}
 
-	d = write(from, value, b);
-	if (bottom == -1 || b == -1)
+	w = write(bottom, buffer, r);
+	if (bottom == -1 || w == -1)
 	{
 		dprintf(STDERR_FILENO,
 		"Error: Can't write to %s\n", argv[2]);
-		free(value);
-		exit(99);
+		free(buffer);
+																							exit(99);
 	}
 
-	b = read(top, value, 1024);
+	r = read(top, buffer, 1024);
 	bottom = open(argv[2], O_WRONLY | O_APPEND);
 
-	} while (b > 0);
+	} while (r > 0);
 
-	free(value);
+	free(buffer);
 	close_file(top);
 	close_file(bottom);
 
