@@ -13,7 +13,7 @@ void print_binary(unsigned long int n)
 	{
 	dec = n >> a;
 
-		if (dec & 1)
+	if (dec & 1)
 	{
 		_putchar('1');
 		jess++;
